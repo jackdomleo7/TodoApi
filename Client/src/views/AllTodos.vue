@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <router-link to="/new">New todo</router-link>
     <p v-if="todos.length === 0">There is nothing in your TODO list</p>
     <ul v-else>
       <li v-for="(todo, index) in todos.data" :key="index">
@@ -30,19 +31,6 @@ export default class AllTodos extends Vue {
     .catch(function (error) {
       console.log(error);
     })
-  }
-
-  private newTodo() {
-    axios.post(this.uri, {
-      name: "Drink tea",
-      isComplete: false
-    })
-        .then(function (repsonse) {
-          console.log(repsonse)
-        })
-        .catch(function (error) {
-          console.log(error)
-        })
   }
 }
 </script>
