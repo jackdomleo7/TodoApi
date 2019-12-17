@@ -1,13 +1,13 @@
 <template>
   <div id="app">
-    <h1>Todo</h1>
-    <HelloWorld/>
+    <h1>Todos</h1>
+    <router-view />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from './components/HelloWorld.vue';
+import HelloWorld from './components/AllTodos.vue';
 
 @Component({
   components: {
