@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import AllTodos from '@/components/AllTodos.vue';
+import AllTodos from '@/views/AllTodos.vue';
 import NewTodo from "@/views/NewTodo.vue";
 
 Vue.use(VueRouter);
