@@ -3,7 +3,8 @@
     <router-link to="/new">New todo</router-link>
     <p v-if="todos.length === 0">There is nothing in your TODO list</p>
     <ul v-else>
-      <li v-for="(todo, index) in todos.data" :key="index">
+      <li v-for="(todo, index) in todos" :key="index">
+        <input type="checkbox" v-model="todo.isComplete" @change="toggleIsComplete($event, todo.id)"/>
         {{ todo.name }}
       </li>
     </ul>
@@ -26,10 +27,24 @@ export default class AllTodos extends Vue {
   private getTodos() {
     axios.get(this.uri)
     .then(response => {
-      this.todos = response;
+      this.todos = response.data;
     })
     .catch(function (error) {
       console.log(error);
+    })
+  }
+
+  private toggleIsComplete(event: Event, id: number) {
+    axios.put(this.uri + '/' + id, {
+      id: this.todos[id - 1].id,
+      name: this.todos[id - 1].name,
+      isComplete: event.target.checked
+    })
+    .then(function (response) {
+      console.log(response)
+    })
+    .catch(function (error) {
+      console.log(error)
     })
   }
 }
