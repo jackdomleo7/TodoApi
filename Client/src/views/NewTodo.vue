@@ -1,10 +1,12 @@
 <template>
   <div class="new-todo">
-    <label>
-      New todo
-      <input type="text" v-model="newTodoText" />
-    </label>
-    <button type="submit" @click="newTodo">Submit new todo</button>
+    <form @submit="newTodo">
+      <label>
+        New todo
+        <input type="text" v-model="newTodoText" />
+      </label>
+      <button type="submit">Submit new todo</button>
+    </form>
     <router-link to="/">View todos</router-link>
   </div>
 </template>
@@ -18,7 +20,9 @@ export default class NewTodo extends Vue {
   private readonly uri: string = "https://localhost:5001/api/TodoItems";
   private newTodoText: string = "";
 
-  private newTodo() {
+  private newTodo(event: Event) {
+    event.preventDefault();
+
     axios.post(this.uri, {
       name: this.newTodoText,
       isComplete: false
