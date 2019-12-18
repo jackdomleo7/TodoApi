@@ -17,10 +17,16 @@
 import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 
+interface ITodos {
+  id: number,
+  name: string,
+  isComplete: boolean
+}
+
 @Component
 export default class AllTodos extends Vue {
   private readonly uri: string = "https://localhost:5001/api/TodoItems";
-  private todos: object[] = [];
+  private todos: ITodos[] = [];
 
   private mounted() {
     this.getTodos();
@@ -40,7 +46,7 @@ export default class AllTodos extends Vue {
     axios.put(this.uri + '/' + id, {
       id: this.todos[id - 1].id,
       name: this.todos[id - 1].name,
-      isComplete: event.target.checked
+      isComplete: (event.target as HTMLInputElement).checked
     })
     .then(function (response) {
       console.log(response)
