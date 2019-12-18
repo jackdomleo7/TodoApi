@@ -1,0 +1,16 @@
+.button {
+  $button-color: #008aff;
+  min-width: 4rem;
+  font-size: 1rem;
+  background-color: $button-color;
+  color: #fff;
+  padding: 0.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+  border: 1px solid;
+
+  &:hover {
+    background-color: mix($button-color, #fff, 90%);
+  }
+}

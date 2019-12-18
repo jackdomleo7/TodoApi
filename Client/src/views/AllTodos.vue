@@ -1,18 +1,20 @@
 <template>
-  <div class="hello">
-    <router-link to="/new">New todo</router-link>
+  <div class="todo">
+    <router-link to="/new" class="button">New todo</router-link>
     <p v-if="todos.length === 0">There is nothing in your TODO list</p>
-    <ul v-else>
-      <li v-for="(todo, index) in todos" :key="index">
-        <input type="checkbox" v-model="todo.isComplete" @change="toggleIsComplete($event, todo.id)"/>
-        {{ todo.name }}
+    <ul class="todo__list" v-else>
+      <li v-for="(todo, index) in todos" :key="index" class="todo__list-item" :class="todo.isComplete ? 'todo__list-item--complete' : ''">
+        <label>
+          <input type="checkbox" v-model="todo.isComplete" @change="toggleIsComplete($event, todo.id)"/>
+          {{ todo.name }}
+        </label>
       </li>
     </ul>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 
 @Component
@@ -51,17 +53,23 @@ export default class AllTodos extends Vue {
 </script>
 
 <style scoped lang="scss">
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
+.todo {
+  &__list {
+    list-style-type: none;
+    padding: 0;
+
+    &-item {
+      margin: 2rem 3rem;
+      font-size: 1.2rem;
+
+      &--complete {
+        text-decoration: line-through;
+      }
+
+      label {
+        cursor: pointer;
+      }
+    }
+  }
 }
 </style>
