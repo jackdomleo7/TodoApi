@@ -3,16 +3,15 @@
     <form @submit="newTodo">
       <label>
         New todo
-        <input type="text" v-model="newTodoText" />
+        <textarea v-model="newTodoText" />
       </label>
-      <button type="submit">Submit new todo</button>
+      <button class="button" type="submit">Submit new todo</button>
     </form>
-    <router-link to="/">View todos</router-link>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Vue } from 'vue-property-decorator';
 import axios from 'axios';
 
 @Component
@@ -27,8 +26,9 @@ export default class NewTodo extends Vue {
       name: this.newTodoText,
       isComplete: false
     })
-    .then(function (response) {
-      console.log(response)
+    .then(response => {
+      console.log(response);
+      this.$router.push('/')
     })
     .catch(function (error) {
       console.log(error)
@@ -36,3 +36,15 @@ export default class NewTodo extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+label {
+  * {
+    display: block;
+  }
+}
+
+.button {
+  margin-top: 4rem;
+}
+</style>
